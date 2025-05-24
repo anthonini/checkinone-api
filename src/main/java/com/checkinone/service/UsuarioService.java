@@ -2,11 +2,11 @@ package com.checkinone.service;
 
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.checkinone.api.dto.UsuarioDTO;
+import com.checkinone.api.mapper.Mapper;
 import com.checkinone.model.Usuario;
 import com.checkinone.repository.UsuarioRepository;
 import com.checkinone.service.exception.NegocioException;
@@ -21,7 +21,7 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	@Autowired
-	private ModelMapper mapper;
+	private Mapper mapper;
 
 	public Optional<UsuarioDTO> findById(Long id) {
 		return repository.findById(id).map(u -> mapper.map(u, UsuarioDTO.class));
