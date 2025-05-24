@@ -1,5 +1,6 @@
 package com.checkinone.api.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,20 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioDTO> buscar(@PathVariable Long id) {
-		Optional<UsuarioDTO> usuario = service.buscar(id);		
-		return usuario.isPresent() ? ResponseEntity.ok(usuario.get()) : ResponseEntity.notFound().build();
-	}
-	
 	@PostMapping
 	public ResponseEntity<UsuarioDTO> cadastrar(@Valid @RequestBody UsuarioDTO usuario) {
 		usuario = service.cadastrar(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+	}
+	
+	@GetMapping
+	public List<UsuarioDTO> listar() {
+		return service.buscarTodos();
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<UsuarioDTO> buscar(@PathVariable Long id) {
+		Optional<UsuarioDTO> usuario = service.buscar(id);		
+		return usuario.isPresent() ? ResponseEntity.ok(usuario.get()) : ResponseEntity.notFound().build();
 	}
 }

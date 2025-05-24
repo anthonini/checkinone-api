@@ -1,5 +1,6 @@
 package com.checkinone.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,6 @@ public class UsuarioService {
 	@Autowired
 	private Mapper mapper;
 
-	public Optional<UsuarioDTO> buscar(Long id) {
-		return repository.findById(id).map(u -> mapper.map(u, UsuarioDTO.class));
-	}
-
 	@Transactional
 	public UsuarioDTO cadastrar(@Valid UsuarioDTO usuarioDTO) throws NegocioException {
 		Usuario usuario = mapper.map(usuarioDTO, Usuario.class);
@@ -39,4 +36,12 @@ public class UsuarioService {
 		return mapper.map(repository.save(usuario), UsuarioDTO.class);
 	}
 	
+	public List<UsuarioDTO> buscarTodos() {
+		List<Usuario> usuarios = repository.findAll();
+		return mapper.mapList(usuarios, UsuarioDTO.class);
+	}
+
+	public Optional<UsuarioDTO> buscar(Long id) {
+		return repository.findById(id).map(u -> mapper.map(u, UsuarioDTO.class));
+	}
 }
