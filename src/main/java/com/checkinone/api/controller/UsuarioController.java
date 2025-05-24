@@ -25,8 +25,8 @@ public class UsuarioController {
 	private UsuarioService service;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Long id) {
-		Optional<UsuarioDTO> usuario = service.findById(id);		
+	public ResponseEntity<UsuarioDTO> buscar(@PathVariable Long id) {
+		Optional<UsuarioDTO> usuario = service.buscar(id);		
 		return usuario.isPresent() ? ResponseEntity.ok(usuario.get()) : ResponseEntity.notFound().build();
 	}
 	

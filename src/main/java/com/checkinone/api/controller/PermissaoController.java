@@ -22,12 +22,12 @@ public class PermissaoController {
 	
 	@GetMapping
 	public List<PermissaoDTO> listar() {
-		return service.findAll();
+		return service.buscarTodos();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PermissaoDTO> buscarPorId(@PathVariable Long id) {
-		Optional<PermissaoDTO> permissao = service.findById(id);		
+	public ResponseEntity<PermissaoDTO> buscar(@PathVariable Long id) {
+		Optional<PermissaoDTO> permissao = service.buscar(id);		
 		return permissao.isPresent() ? ResponseEntity.ok(permissao.get()) : ResponseEntity.notFound().build();
 	}
 	

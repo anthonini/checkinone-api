@@ -23,7 +23,7 @@ public class UsuarioService {
 	@Autowired
 	private Mapper mapper;
 
-	public Optional<UsuarioDTO> findById(Long id) {
+	public Optional<UsuarioDTO> buscar(Long id) {
 		return repository.findById(id).map(u -> mapper.map(u, UsuarioDTO.class));
 	}
 

@@ -20,12 +20,12 @@ public class PermissaoService {
 	@Autowired
 	private Mapper mapper;
 	
-	public List<PermissaoDTO> findAll() {
+	public List<PermissaoDTO> buscarTodos() {
 		List<Permissao> permissoes = repository.findAll();
 		return mapper.mapList(permissoes, PermissaoDTO.class);
 	}
 
-	public Optional<PermissaoDTO> findById(Long id) {
+	public Optional<PermissaoDTO> buscar(Long id) {
 		return repository.findById(id).map(u -> mapper.map(u, PermissaoDTO.class));
 	}
 }
