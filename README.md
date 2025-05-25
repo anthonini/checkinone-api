@@ -1,6 +1,6 @@
-# 🏨 CheckInOne
+# 🏨 CheckInOne API
 
-**CheckInOne** é um sistema web completo para gestão de reservas de hotel. Desenvolvido com Spring Boot, ele oferece funcionalidades robustas para o gerenciamento de quartos, hóspedes e reservas, com controle de acesso por perfis de usuário e uma API REST documentada via Swagger.
+**CheckInOne** CheckInOne é uma API REST para gestão de reservas de hotel. Desenvolvido com Spring Boot, ele oferece funcionalidades robustas para o gerenciamento de quartos, hóspedes e reservas, com controle de acesso por perfis de usuário e uma API REST documentada via Swagger.
 
 ## 🚀 Funcionalidades
 
@@ -14,7 +14,6 @@
 - Criação, alteração e cancelamento de reservas
 - Visualização de histórico de reservas de um hóspede
 - Cadastro e status de pagamento
-- Geração de faturas
 - API REST com documentação OpenAPI
 - Suporte a múltiplos ambientes (`dev`, `prod`)
 
@@ -25,8 +24,7 @@
 - Spring Security
 - Spring Data JPA (Hibernate)
 - PostgreSQL
-- API RESTful + Swagger (springdoc-openapi)
-- Frontend: Thymeleaf
+- Swagger/OpenAPI (springdoc-openapi)
 
 ## 🗃️ Entidades Principais
 
@@ -81,14 +79,15 @@ spring:
 
 ```
 com.checkinone
-├── controller
-├── service
-├── repository
+├── api
+    ├── controller
+    ├── dto
+    ├── exceptionhandler
+    ├── mapper
 ├── model
-├── dto
+├── repository
+├── service
 ├── security
-├── config
-└── exception
 ```
 
 ## 📄 Documentação da API
