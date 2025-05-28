@@ -13,6 +13,9 @@ public class UsuarioDTO {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Long id;
 
+	@NotBlank(message = "Nome é obrigatório")
+	private String nome;
+	
 	@Email(message = "E-mail inválido")
 	@NotBlank(message = "E-mail é obrigatório")
 	private String email;
@@ -28,6 +31,14 @@ public class UsuarioDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
