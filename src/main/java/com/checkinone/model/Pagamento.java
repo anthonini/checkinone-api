@@ -1,6 +1,7 @@
 package com.checkinone.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -24,11 +25,13 @@ public class Pagamento implements Serializable {
 	@Column(name = "id_pagamento")
 	private Long id;
 	
+	@Column(nullable = false)
+	private BigDecimal valor;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "forma_pagamento", nullable = false)
 	private FormaPagamento formaPagamento;
 	
-	@Column(nullable = false)
 	private LocalDateTime data;
 	
 	@Enumerated(EnumType.STRING)
@@ -41,6 +44,14 @@ public class Pagamento implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
 
 	public FormaPagamento getFormaPagamento() {
