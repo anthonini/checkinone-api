@@ -44,6 +44,21 @@ public class ResourceServerConfig {
                     .permitAll()
                 );
         
+        http.logout(
+			httpSecurityLogoutConfigurer -> {
+				httpSecurityLogoutConfigurer.logoutSuccessHandler(
+						(httpServletRequest, httpServletResponse, authentication) -> {
+							String referer = httpServletRequest.getHeader("referer");
+							if(referer != null) {
+								httpServletResponse.sendRedirect(referer);
+							} else {
+								httpServletResponse.sendRedirect(httpServletRequest.getContextPath());
+							}
+						}
+				);
+			}
+		);
+        
         return http.build();
     }
 
