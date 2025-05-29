@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.checkinone.api.dto.UsuarioDTO;
@@ -23,6 +24,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private Mapper mapper;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public UsuarioDTO cadastrar(@Valid UsuarioDTO usuarioDTO) throws NegocioException {
@@ -32,6 +36,8 @@ public class UsuarioService {
 		if(usuarioExistentePorEmail.isPresent()) {
 			throw new NegocioException("E-mail já cadastrado");
 		}
+		
+		usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
 		
 		return mapper.map(repository.save(usuario), UsuarioDTO.class);
 	}
