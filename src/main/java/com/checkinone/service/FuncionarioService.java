@@ -9,6 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.checkinone.api.dto.FuncionarioDTO;
+import com.checkinone.api.dto.FuncionarioDTOPost;
 import com.checkinone.api.mapper.Mapper;
 import com.checkinone.model.Funcionario;
 import com.checkinone.repository.FuncionarioRepository;
@@ -30,9 +31,9 @@ public class FuncionarioService {
 	private MessageSource messageSource;
 	
 	@Transactional
-	public FuncionarioDTO cadastrar(FuncionarioDTO funcionarioDTO) {
+	public FuncionarioDTOPost cadastrar(FuncionarioDTOPost funcionarioDTO) {
 		Funcionario funcionario = mapper.map(funcionarioDTO, Funcionario.class);
-		return mapper.map(repository.save(funcionario), FuncionarioDTO.class);
+		return mapper.map(repository.save(funcionario), FuncionarioDTOPost.class);
 	}
 
 	public List<FuncionarioDTO> listar() {
@@ -45,14 +46,14 @@ public class FuncionarioService {
 	}
 	
 	@Transactional
-	public FuncionarioDTO atualizar(@Valid FuncionarioDTO funcionarioDTO) {
+	public FuncionarioDTOPost atualizar(@Valid FuncionarioDTOPost funcionarioDTO) {
 		Optional<Funcionario> funcionarioCadastrado = repository.findById(funcionarioDTO.getId());
 		if(funcionarioCadastrado.isEmpty()) {
 			throw new NegocioException(messageSource.getMessage("funcionario.nao-encontrado", null, LocaleContextHolder.getLocale()));
 		}
 		
 		Funcionario funcionario = mapper.map(funcionarioDTO, Funcionario.class);
-		return mapper.map(repository.save(funcionario), FuncionarioDTO.class);
+		return mapper.map(repository.save(funcionario), FuncionarioDTOPost.class);
 	}
 
 	@Transactional

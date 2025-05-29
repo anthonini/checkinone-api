@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.checkinone.api.dto.FuncionarioDTO;
+import com.checkinone.api.dto.FuncionarioDTOPost;
 import com.checkinone.service.FuncionarioService;
 
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class FuncionarioController {
 	private FuncionarioService service;
 	
 	@PostMapping
-	public ResponseEntity<FuncionarioDTO> cadastrar(@Valid @RequestBody FuncionarioDTO funcionario) {
+	public ResponseEntity<FuncionarioDTOPost> cadastrar(@Valid @RequestBody FuncionarioDTOPost funcionario) {
 		funcionario = service.cadastrar(funcionario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
 	}
@@ -46,7 +47,7 @@ public class FuncionarioController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<FuncionarioDTO> atualizar(@PathVariable Long id, @Valid @RequestBody FuncionarioDTO funcionario) {
+	public ResponseEntity<FuncionarioDTOPost> atualizar(@PathVariable Long id, @Valid @RequestBody FuncionarioDTOPost funcionario) {
 		funcionario.setId(id);
 		funcionario = service.atualizar(funcionario);
 		return ResponseEntity.ok(funcionario);
