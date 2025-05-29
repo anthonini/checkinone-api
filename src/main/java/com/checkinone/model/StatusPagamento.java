@@ -3,6 +3,7 @@ package com.checkinone.model;
 public enum StatusPagamento {
 
 	PAGO("Pago"),
+	PROCESSANDO("Processando"),
 	PENDENTE("Pendente");
 	
 	private String descricao;
