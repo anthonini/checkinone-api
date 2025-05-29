@@ -33,7 +33,7 @@ public class UsuarioService {
 		Usuario usuario = mapper.map(usuarioDTO, Usuario.class);
 		Optional<Usuario> usuarioExistentePorEmail = repository.findByEmail(usuario.getEmail());
 		
-		if(usuarioExistentePorEmail.isPresent()) {
+		if(usuarioExistentePorEmail.isPresent() && !usuarioExistentePorEmail.get().equals(usuario)) {
 			throw new NegocioException("E-mail já cadastrado");
 		}
 		
