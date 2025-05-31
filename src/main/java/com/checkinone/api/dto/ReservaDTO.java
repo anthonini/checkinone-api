@@ -1,6 +1,6 @@
 package com.checkinone.api.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.checkinone.model.StatusReserva;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,10 +14,10 @@ public class ReservaDTO {
     private Long id;
 
     @NotNull(message = "Data de entrada é campo obrigatório")
-    private Date dataEntrada;
+    private LocalDateTime dataEntrada;
 
     @NotNull(message = "Data de saída é campo obrigatório")
-    private Date dataSaida;
+    private LocalDateTime dataSaida;
 
     @NotNull(message = "Status da reserva é campo obrigatório")
     private StatusReserva status;
@@ -47,23 +47,23 @@ public class ReservaDTO {
 		this.pagamento = pagamento;
 	}
 
-	public Date getDataEntrada() {
-        return dataEntrada;
-    }
+    public LocalDateTime getDataEntrada() {
+		return dataEntrada;
+	}
 
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
-    }
+	public void setDataEntrada(LocalDateTime dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
 
-    public Date getDataSaida() {
-        return dataSaida;
-    }
+	public LocalDateTime getDataSaida() {
+		return dataSaida;
+	}
 
-    public void setDataSaida(Date dataSaida) {
-        this.dataSaida = dataSaida;
-    }
+	public void setDataSaida(LocalDateTime dataSaida) {
+		this.dataSaida = dataSaida;
+	}
 
-    public StatusReserva getStatus() {
+	public StatusReserva getStatus() {
         return status;
     }
 

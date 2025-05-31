@@ -10,7 +10,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.checkinone.api.dto.HospedeDTO;
 import com.checkinone.api.dto.PagamentoDTO;
 import com.checkinone.api.dto.ReservaDTO;
 import com.checkinone.api.mapper.Mapper;
