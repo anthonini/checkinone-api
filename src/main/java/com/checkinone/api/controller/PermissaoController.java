@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.checkinone.api.dto.PermissaoDTO;
 import com.checkinone.service.PermissaoService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "API de permissões")
 @RestController
 @RequestMapping("/permissoes")
 public class PermissaoController {

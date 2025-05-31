@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.checkinone.api.dto.HospedeDTO;
 import com.checkinone.service.HospedeService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "API de hóspedes")
 @RestController
 @RequestMapping("/hospedes")
 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")

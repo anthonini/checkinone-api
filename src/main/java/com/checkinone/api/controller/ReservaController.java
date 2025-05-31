@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.checkinone.api.dto.ReservaDTO;
 import com.checkinone.service.ReservaService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "API de reservas")
 @RestController
 @RequestMapping("/reservas")
 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.checkinone.api.dto.PagamentoDTO;
 import com.checkinone.service.PagamentoService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "API de pagamentos")
 @RestController
 @RequestMapping("/pagamentos")
 public class PagamentoController {
