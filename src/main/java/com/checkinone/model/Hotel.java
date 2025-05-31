@@ -21,7 +21,7 @@ public class Hotel implements Serializable {
     @Column(name = "telefone")
     private String telefone;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_gerente")
     private Funcionario gerente;
 

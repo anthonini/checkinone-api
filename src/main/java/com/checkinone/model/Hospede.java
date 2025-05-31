@@ -1,9 +1,17 @@
 package com.checkinone.model;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "hospede")
@@ -26,6 +34,9 @@ public class Hospede implements Serializable {
 
     @Column(name = "endereco")
     private String endereco;
+    
+    @OneToMany(mappedBy = "hospede")
+    private List<Reserva> reservas;
 
     public Long getId() {
         return id;
@@ -66,4 +77,12 @@ public class Hospede implements Serializable {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
 }

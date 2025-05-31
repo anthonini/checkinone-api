@@ -44,7 +44,7 @@ public class Reserva implements Serializable {
     @Column(name = "id_status_reserva")
     private StatusReserva status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_hospede")
     private Hospede hospede;
 
