@@ -21,8 +21,10 @@ import com.checkinone.api.dto.FuncionarioDTO;
 import com.checkinone.api.dto.FuncionarioDTOPost;
 import com.checkinone.service.FuncionarioService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "API de funcionários")
 @RestController
 @RequestMapping("/funcionarios")
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")

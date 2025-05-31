@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.checkinone.api.security.UsuarioSistema;
 import com.checkinone.model.Usuario;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+@Hidden
 @RestController
 @RequestMapping("/oauth2")
 public class OAuth2Controller {
