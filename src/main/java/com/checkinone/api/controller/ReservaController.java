@@ -3,6 +3,7 @@ package com.checkinone.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,6 @@ public class ReservaController {
         return reservaService.listar();
     }
 
-
-
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> buscarPorId(@PathVariable Long id) {
         Optional<ReservaDTO> reserva = reservaService.buscar(id);
@@ -69,4 +68,5 @@ public class ReservaController {
     public List<ReservaDTO> historicoPorHospede(@PathVariable Long idHospede) {
         return reservaService.listarHistoricoPorHospede(idHospede);
     }
+
 }

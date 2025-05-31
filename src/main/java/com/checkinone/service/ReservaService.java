@@ -1,5 +1,6 @@
 package com.checkinone.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,14 +60,8 @@ public class ReservaService {
         return mapper.mapList(reservas, ReservaDTO.class);
     }
 
-    public ReservaDTO buscarPorHospede(HospedeDTO hospedeDTO){
-        //TODO
-        return null;
-    }
-
-    public ReservaDTO buscarPorStatus(String statusReserva){
-        //TODO
-        return null;
+    public Long reservasAtivasHoje() {
+        return reservaRepository.countReservasAtivasHoje(LocalDateTime.now());
     }
 
     @Transactional
@@ -88,4 +83,7 @@ public class ReservaService {
         return mapper.mapList(reservas, ReservaDTO.class);
     }
 
+    public Long totalReservas() {
+        return reservaRepository.count();
+    }
 }

@@ -3,6 +3,7 @@ package com.checkinone.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.checkinone.model.StatusOcupacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -46,11 +47,6 @@ public class QuartoService {
         }
     }
 
-    public QuartoDTO buscarPorNumeroQuarto(int numero) {
-        //TODO
-        return null;
-    }
-
     public List<QuartoDTO> listar() {
         List<Quarto> quartos = quartoRepository.findAll();
         return mapper.mapList(quartos, QuartoDTO.class);
@@ -64,5 +60,13 @@ public class QuartoService {
 
     public Optional<QuartoDTO> buscar(Long id) {
         return quartoRepository.findById(id).map(quarto -> mapper.map(quarto, QuartoDTO.class));
+    }
+
+    public Long totalQuartos() {
+        return quartoRepository.count();
+    }
+
+    public Long totalQuartosOcupados() {
+        return quartoRepository.countByStatus(StatusOcupacao.OCUPADO);
     }
 }
