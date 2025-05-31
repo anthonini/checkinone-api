@@ -1,18 +1,23 @@
 package com.checkinone.service;
 
-import com.checkinone.api.dto.HospedeDTO;
-import com.checkinone.api.dto.ReservaDTO;
-import com.checkinone.api.mapper.Mapper;
-import com.checkinone.model.Reserva;
-import com.checkinone.repository.ReservaRepository;
-import com.checkinone.service.exception.NegocioException;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.checkinone.api.dto.HospedeDTO;
+import com.checkinone.api.dto.PagamentoDTO;
+import com.checkinone.api.dto.ReservaDTO;
+import com.checkinone.api.mapper.Mapper;
+import com.checkinone.model.Reserva;
+import com.checkinone.repository.ReservaRepository;
+import com.checkinone.service.exception.NegocioException;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ReservaService {
@@ -25,20 +30,26 @@ public class ReservaService {
 
     @Autowired
     private MessageSource messageSource;
+    
+    @Autowired
+    private PagamentoService pagamentoService;
 
-
+    @Transactional
     public ReservaDTO cadastrar(ReservaDTO reservaDTO){
+        PagamentoDTO pagamento = pagamentoService.salvar(reservaDTO.getPagamento());
+        reservaDTO.setPagamento(pagamento);
         Reserva reserva = mapper.map(reservaDTO, Reserva.class);
+        reserva.setDataCadastro(new Date());
         return mapper.map(reservaRepository.save(reserva), ReservaDTO.class);
     }
 
+    @Transactional
     public ReservaDTO atualizar(ReservaDTO reservaDTO){
         Optional<Reserva> reservaCadastrada = reservaRepository.findById(reservaDTO.getId());
         if(reservaCadastrada.isPresent()){
-            Reserva reserva = mapper.map(reservaDTO, Reserva.class);
-            return mapper.map(reservaRepository.save(reserva), ReservaDTO.class);
+            return cadastrar(reservaDTO);
         } else {
-            throw new NegocioException(messageSource.getMessage("hotel.nao-encontrado", null, LocaleContextHolder.getLocale()));
+            throw new NegocioException(messageSource.getMessage("reserva.nao-encontrada", null, LocaleContextHolder.getLocale()));
         }
 
     }
@@ -58,6 +69,7 @@ public class ReservaService {
         return null;
     }
 
+    @Transactional
     public void remover(Long id){
         reservaRepository.deleteById(id);
     }
@@ -72,7 +84,7 @@ public class ReservaService {
     }
 
     public List<ReservaDTO> listarHistoricoPorHospede(Long idHospede) {
-        List<Reserva> reservas = reservaRepository.findByHospedeResponsavelIdOrderByDataCadastroDesc(idHospede);
+        List<Reserva> reservas = reservaRepository.findByHospedeIdOrderByDataCadastroDesc(idHospede);
         return mapper.mapList(reservas, ReservaDTO.class);
     }
 

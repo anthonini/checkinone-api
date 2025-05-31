@@ -9,5 +9,5 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
     List<Reserva> findTop10ByOrderByDataCadastroDesc();
 
-    List<Reserva> findByHospedeResponsavelIdOrderByDataCadastroDesc(Long hospedeId);
+    List<Reserva> findByHospedeIdOrderByDataCadastroDesc(Long hospedeId);
 }

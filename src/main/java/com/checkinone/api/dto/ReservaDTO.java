@@ -1,25 +1,17 @@
 package com.checkinone.api.dto;
 
-import com.checkinone.model.Hospede;
-import com.checkinone.model.Pagamento;
-import com.checkinone.model.Quarto;
+import java.util.Date;
+
 import com.checkinone.model.StatusReserva;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 public class ReservaDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
-
-    private Pagamento pagamento;
 
     @NotNull(message = "Data de entrada é campo obrigatório")
     private Date dataEntrada;
@@ -27,20 +19,18 @@ public class ReservaDTO {
     @NotNull(message = "Data de saída é campo obrigatório")
     private Date dataSaida;
 
-    @NotBlank(message = "Status da reserva é campo obrigatório")
+    @NotNull(message = "Status da reserva é campo obrigatório")
     private StatusReserva status;
 
-    @NotNull(message = "Valor da reserva é obrigatório")
-    @DecimalMin(value = "0.00", message = "O valor deve ser maior que R$0,00")
-    @DecimalMax(value = "9999999.99", message = "Valor deve ser menor ou igual a R$9.999.999,99")
-    private BigDecimal valor;
-
-    @NotNull(message = "Hóspede responsável é campo obrigatório")
-    private Hospede hospedeResponsavel;
+    @NotNull(message = "Hóspede é campo obrigatório")
+    private HospedeDTO hospede;
 
     @NotNull(message = "Quarto é campo obrigatório")
-    private Quarto quarto;
-
+    private QuartoDTO quarto;
+    
+    @Valid
+    private PagamentoDTO pagamento;
+    
     public Long getId() {
         return id;
     }
@@ -49,15 +39,15 @@ public class ReservaDTO {
         this.id = id;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
+    public PagamentoDTO getPagamento() {
+		return pagamento;
+	}
 
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-    }
+	public void setPagamento(PagamentoDTO pagamento) {
+		this.pagamento = pagamento;
+	}
 
-    public Date getDataEntrada() {
+	public Date getDataEntrada() {
         return dataEntrada;
     }
 
@@ -81,27 +71,19 @@ public class ReservaDTO {
         this.status = status;
     }
 
-    public BigDecimal getValor() {
-        return valor;
-    }
+	public HospedeDTO getHospede() {
+		return hospede;
+	}
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+	public void setHospede(HospedeDTO hospede) {
+		this.hospede = hospede;
+	}
 
-    public Hospede getHospedeResponsavel() {
-        return hospedeResponsavel;
-    }
+	public QuartoDTO getQuarto() {
+		return quarto;
+	}
 
-    public void setHospedeResponsavel(Hospede hospedeResponsavel) {
-        this.hospedeResponsavel = hospedeResponsavel;
-    }
-
-    public Quarto getQuarto() {
-        return quarto;
-    }
-
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
-    }
+	public void setQuarto(QuartoDTO quarto) {
+		this.quarto = quarto;
+	}
 }

@@ -1,11 +1,23 @@
 package com.checkinone.model;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Objects;
+
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -18,28 +30,25 @@ public class Reserva implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_forma_pagamento")
     private Pagamento pagamento;
 
     @Column(name = "data_entrada")
-    private Date dataEntrada;
+    private LocalDateTime dataEntrada;
 
     @Column(name = "data_saida")
-    private Date dataSaida;
+    private LocalDateTime dataSaida;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "id_status_reserva")
     private StatusReserva status;
 
-    @Column(name = "valor")
-    private BigDecimal valor;
-
     @OneToOne
-    @JoinColumn(name = "id_hospede_responsavel")
-    private Hospede hospedeResponsavel;
+    @JoinColumn(name = "id_hospede")
+    private Hospede hospede;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_quarto")
     private Quarto quarto;
 
@@ -62,23 +71,23 @@ public class Reserva implements Serializable {
         this.pagamento = pagamento;
     }
 
-    public Date getDataEntrada() {
-        return dataEntrada;
-    }
+    public LocalDateTime getDataEntrada() {
+		return dataEntrada;
+	}
 
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
-    }
+	public void setDataEntrada(LocalDateTime dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
 
-    public Date getDataSaida() {
-        return dataSaida;
-    }
+	public LocalDateTime getDataSaida() {
+		return dataSaida;
+	}
 
-    public void setDataSaida(Date dataSaida) {
-        this.dataSaida = dataSaida;
-    }
+	public void setDataSaida(LocalDateTime dataSaida) {
+		this.dataSaida = dataSaida;
+	}
 
-    public StatusReserva getStatus() {
+	public StatusReserva getStatus() {
         return status;
     }
 
@@ -86,23 +95,15 @@ public class Reserva implements Serializable {
         this.status = status;
     }
 
-    public BigDecimal getValor() {
-        return valor;
-    }
+    public Hospede getHospede() {
+		return hospede;
+	}
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+	public void setHospede(Hospede hospede) {
+		this.hospede = hospede;
+	}
 
-    public Hospede getHospedeResponsavel() {
-        return hospedeResponsavel;
-    }
-
-    public void setHospedeResponsavel(Hospede hospedeResponsavel) {
-        this.hospedeResponsavel = hospedeResponsavel;
-    }
-
-    public Quarto getQuarto() {
+	public Quarto getQuarto() {
         return quarto;
     }
 
@@ -117,6 +118,20 @@ public class Reserva implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reserva other = (Reserva) obj;
+		return Objects.equals(id, other.id);
+	}
 }

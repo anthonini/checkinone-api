@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.checkinone.api.dto.PagamentoDTO;
-import com.checkinone.api.service.PagamentoService;
+import com.checkinone.service.PagamentoService;
 
 import jakarta.validation.Valid;
 
@@ -32,7 +32,7 @@ public class PagamentoController {
 	@PutMapping("/{id}")
 	public ResponseEntity<PagamentoDTO> atualizar(@PathVariable Long id, @Valid @RequestBody PagamentoDTO pagamento) {
 		pagamento.setId(id);
-		pagamento = service.atualizar(pagamento);
+		pagamento = service.salvar(pagamento);
 		return ResponseEntity.ok(pagamento);
 	}
 }

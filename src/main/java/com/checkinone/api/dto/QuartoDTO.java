@@ -1,22 +1,24 @@
 package com.checkinone.api.dto;
 
+import java.math.BigDecimal;
+
 import com.checkinone.model.Hotel;
 import com.checkinone.model.StatusOcupacao;
 import com.checkinone.model.TipoQuarto;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.*;
 
-import java.math.BigDecimal;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 public class QuartoDTO {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @NotBlank(message = "Número é campo obrigatório")
+    @NotNull(message = "Número é campo obrigatório")
     private String numero;
 
-    @NotBlank(message = "Tipo de Quarto é campo obrigatório")
+    @NotNull(message = "Tipo de Quarto é campo obrigatório")
     private TipoQuarto tipo;
 
     @NotNull(message = "Capacidade é campo obrigatório")
@@ -28,10 +30,10 @@ public class QuartoDTO {
     @DecimalMax(value = "9999999.99", message = "Valor deve ser menor ou igual a R$9.999.999,99")
     private BigDecimal valorDiaria;
 
-    @NotBlank(message = "Status de ocupação do quarto é campo obrigatório")
+    @NotNull(message = "Status de ocupação do quarto é campo obrigatório")
     private StatusOcupacao status;
 
-    @NotBlank(message = "Hotel é campo obrigatório")
+    @NotNull(message = "Hotel é campo obrigatório")
     private Hotel hotel;
 
     public Long getId() {
@@ -86,7 +88,7 @@ public class QuartoDTO {
         return capacidade;
     }
 
-    public void setCapacidade() {
+    public void setCapacidade(Integer capacidade) {
         this.capacidade = capacidade;
     }
 }

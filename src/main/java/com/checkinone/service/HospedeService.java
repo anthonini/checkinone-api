@@ -5,6 +5,9 @@ import com.checkinone.api.mapper.Mapper;
 import com.checkinone.model.Hospede;
 import com.checkinone.repository.HospedeRepository;
 import com.checkinone.service.exception.NegocioException;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -26,11 +29,13 @@ public class HospedeService {
     @Autowired
     private MessageSource messageSource;
 
+    @Transactional
     public HospedeDTO cadastrar(HospedeDTO hospedeDTO) {
         Hospede hospede = mapper.map(hospedeDTO, Hospede.class);
         return mapper.map(hospedeRepository.save(hospede), HospedeDTO.class);
     }
 
+    @Transactional
     public HospedeDTO atualizar(HospedeDTO hospedeDTO) {
         Optional<Hospede> hospedeCadastrado = hospedeRepository.findById(hospedeDTO.getId());
         if(hospedeCadastrado.isPresent()) {
@@ -51,6 +56,7 @@ public class HospedeService {
         return mapper.mapList(hospedes, HospedeDTO.class);
     }
 
+    @Transactional
     public void remover(Long id) {
         hospedeRepository.deleteById(id);
     }

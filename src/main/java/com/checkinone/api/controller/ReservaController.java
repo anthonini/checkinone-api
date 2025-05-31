@@ -1,33 +1,36 @@
 package com.checkinone.api.controller;
 
-import com.checkinone.api.dto.ReservaDTO;
-import com.checkinone.api.service.PagamentoService;
-import com.checkinone.service.ReservaService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.checkinone.api.dto.ReservaDTO;
+import com.checkinone.service.ReservaService;
+
+import jakarta.validation.Valid;
+
+@RestController
 @RequestMapping("/reservas")
 public class ReservaController {
     
     @Autowired
     private ReservaService reservaService;
 
-    @Autowired
-    private PagamentoService pagamentoService;
-
     @PostMapping
     public ResponseEntity<ReservaDTO> cadastrar(@Valid @RequestBody ReservaDTO reserva) {
         reserva = reservaService.cadastrar(reserva);
-        //TODO definir estratégia para o pagamento
-
         return ResponseEntity.status(HttpStatus.CREATED).body(reserva);
     }
 

@@ -1,16 +1,17 @@
 package com.checkinone.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.validation.constraints.NotBlank;
 
 public class HospedeDTO {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
+    @CPF
     @NotBlank(message = "CPF é obrigatório")
     private String cpf;
 

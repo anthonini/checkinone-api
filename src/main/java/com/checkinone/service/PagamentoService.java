@@ -1,4 +1,4 @@
-package com.checkinone.api.service;
+package com.checkinone.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class PagamentoService {
 	}
 	
 	@Transactional
-	public PagamentoDTO atualizar(@Valid PagamentoDTO pagamentoDTO) {
+	public PagamentoDTO salvar(@Valid PagamentoDTO pagamentoDTO) {
 		Pagamento pagamento = mapper.map(pagamentoDTO, Pagamento.class);
 		if(pagamento.getStatus() == null) {
 			pagamento.setStatus(StatusPagamento.PENDENTE);

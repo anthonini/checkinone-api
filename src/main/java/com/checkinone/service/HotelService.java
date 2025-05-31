@@ -33,6 +33,7 @@ public class HotelService {
         return mapper.map(hotelRepository.save(hotel), HotelDTO.class);
     }
 
+    @Transactional
     public HotelDTO atualizar(@Valid HotelDTO hotelDTO) {
         Optional<Hotel> hotelCadastrado = hotelRepository.findById(hotelDTO.getId());
         if(hotelCadastrado.isPresent()) {
@@ -48,6 +49,7 @@ public class HotelService {
         return hotelRepository.findById(id).map(hotel -> mapper.map(hotel, HotelDTO.class));
     }
 
+    @Transactional
     public void remover(Long id) {
         hotelRepository.deleteById(id);
     }
