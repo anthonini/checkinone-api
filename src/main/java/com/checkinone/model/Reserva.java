@@ -43,6 +43,9 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "id_quarto")
     private Quarto quarto;
 
+    @Column(name = "data_cadastro")
+    private Date dataCadastro;
+
     public Long getId() {
         return id;
     }
@@ -106,6 +109,14 @@ public class Reserva implements Serializable {
     public void setQuarto(Quarto quarto) {
         this.quarto = quarto;
     }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
 
 
 }
