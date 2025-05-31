@@ -57,4 +57,7 @@ public class QuartoService {
     }
 
 
+    public Optional<QuartoDTO> buscar(Long id) {
+        return quartoRepository.findById(id).map(quarto -> mapper.map(quarto, QuartoDTO.class));
+    }
 }

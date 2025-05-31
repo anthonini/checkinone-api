@@ -7,7 +7,6 @@ import com.checkinone.model.Reserva;
 import com.checkinone.repository.ReservaRepository;
 import com.checkinone.service.exception.NegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -64,4 +63,7 @@ public class ReservaService {
     }
 
 
+    public Optional<ReservaDTO> buscar(Long id) {
+        return reservaRepository.findById(id).map(reserva -> mapper.map(reserva, ReservaDTO.class));
+    }
 }

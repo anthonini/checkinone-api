@@ -44,6 +44,10 @@ public class HotelService {
 
     }
 
+    public Optional<HotelDTO> buscar(Long id) {
+        return hotelRepository.findById(id).map(hotel -> mapper.map(hotel, HotelDTO.class));
+    }
+
     public void remover(Long id) {
         hotelRepository.deleteById(id);
     }

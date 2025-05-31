@@ -55,4 +55,7 @@ public class HospedeService {
         hospedeRepository.deleteById(id);
     }
 
+    public Optional<HospedeDTO> buscar(Long id) {
+        return hospedeRepository.findById(id).map(hospede -> mapper.map(hospede, HospedeDTO.class));
+    }
 }
