@@ -62,8 +62,18 @@ public class ReservaService {
         reservaRepository.deleteById(id);
     }
 
-
     public Optional<ReservaDTO> buscar(Long id) {
         return reservaRepository.findById(id).map(reserva -> mapper.map(reserva, ReservaDTO.class));
     }
+
+    public List<ReservaDTO> listarUltimasReservas() {
+        List<Reserva> reservas = reservaRepository.findTop10ByOrderByDataCadastroDesc();
+        return mapper.mapList(reservas, ReservaDTO.class);
+    }
+
+    public List<ReservaDTO> listarHistoricoPorHospede(Long idHospede) {
+        List<Reserva> reservas = reservaRepository.findByHospedeResponsavelIdOrderByDataCadastroDesc(idHospede);
+        return mapper.mapList(reservas, ReservaDTO.class);
+    }
+
 }
