@@ -12,6 +12,9 @@ public class HotelDTO {
 
     @NotBlank(message = "Nome é campo obrigatório")
     private String nome;
+    
+    @NotBlank(message = "Endereço é campo obrigatório")
+    private String endereco;
 
     @NotBlank(message = "Telefone é campo obrigatório")
     private String telefone;
@@ -35,7 +38,15 @@ public class HotelDTO {
         this.nome = nome;
     }
 
-    public @NotBlank(message = "Telefone é campo obrigatório") String getTelefone() {
+    public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public @NotBlank(message = "Telefone é campo obrigatório") String getTelefone() {
         return telefone;
     }
 

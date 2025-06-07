@@ -17,6 +17,9 @@ public class Hotel implements Serializable {
 
     @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "endereco")
+    private String endereco;
 
     @Column(name = "telefone")
     private String telefone;
@@ -49,7 +52,15 @@ public class Hotel implements Serializable {
         this.nome = nome;
     }
 
-    public String getTelefone() {
+    public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
         return telefone;
     }
 
