@@ -18,10 +18,9 @@ public class BasicSecurityConfig {
 	@Bean
 	@Order(1)
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-        	.authorizeHttpRequests(authz -> authz
-        			.requestMatchers("/layout/**", "/categories").permitAll()
-        			.anyRequest().authenticated())
+		SecurityConfigRules.apply(http);
+		
+		http
         	.formLogin(login -> login
                 	.loginPage("/login")
                     .permitAll()

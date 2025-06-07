@@ -34,19 +34,18 @@ public class ResourceServerConfig {
 	@Bean
 	@Order(1)
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+		SecurityConfigRules.apply(http);
+		
         http
-        	.authorizeHttpRequests(authz -> authz
-        			.requestMatchers("/layout/**", "/categories").permitAll()
-        			.anyRequest().authenticated())
-        		.csrf(csrf -> csrf.disable())
-        		.oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt
-                            .jwtAuthenticationConverter(jwtAuthenticationConverter())
-                        )
-                ).formLogin(login -> login
-                	.loginPage("/login")
-                    .permitAll()
-                );
+    		.csrf(csrf -> csrf.disable())
+    		.oauth2ResourceServer(oauth2 -> oauth2
+                    .jwt(jwt -> jwt
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                    )
+            ).formLogin(login -> login
+            	.loginPage("/login")
+                .permitAll()
+            );
         
         http.logout(
 			httpSecurityLogoutConfigurer -> {
