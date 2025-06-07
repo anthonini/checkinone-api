@@ -2,6 +2,8 @@ package com.checkinone.api.exceptionhandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,14 @@ public class CheckInOneExceptionHandler extends ResponseEntityExceptionHandler {
 		String[] detalhes = erro.split("Detalhe:");
 		erro = detalhes != null &&  detalhes.length > 0 ? detalhes[detalhes.length-1] : erro;
 		
-		return handleExceptionInternal(ex, new Erro(mensagemOperacaoNaoPermitida, erro), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+		String regex = "tabela \"([^\"]+)\"";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher1 = pattern.matcher(erro);
+        if (matcher1.find()) {
+        	return handleExceptionInternal(ex, new Erro(matcher1.group(1)), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        }
+		
+        return handleExceptionInternal(ex, new Erro(mensagemOperacaoNaoPermitida, erro), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	
 	@Override
