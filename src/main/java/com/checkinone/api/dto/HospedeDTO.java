@@ -2,6 +2,7 @@ package com.checkinone.api.dto;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class HospedeDTO {
@@ -10,6 +11,10 @@ public class HospedeDTO {
 
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
+    
+    @Email
+    @NotBlank(message = "E-mail é obrigatório")
+    private String email;
 
     @CPF
     @NotBlank(message = "CPF é obrigatório")
@@ -37,7 +42,15 @@ public class HospedeDTO {
         this.nome = nome;
     }
 
-    public @NotBlank(message = "CPF é obrigatório") String getCpf() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public @NotBlank(message = "CPF é obrigatório") String getCpf() {
         return cpf;
     }
 

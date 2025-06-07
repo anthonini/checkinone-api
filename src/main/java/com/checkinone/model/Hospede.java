@@ -25,6 +25,9 @@ public class Hospede implements Serializable {
 
     @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "cpf")
     private String cpf;
@@ -54,7 +57,15 @@ public class Hospede implements Serializable {
         this.nome = nome;
     }
 
-    public String getCpf() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
         return cpf;
     }
 
