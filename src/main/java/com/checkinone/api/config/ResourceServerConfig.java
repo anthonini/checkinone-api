@@ -25,7 +25,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
-@Profile("oauth-security")
+@Profile("prod")
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
