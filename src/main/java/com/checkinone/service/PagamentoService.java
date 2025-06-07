@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.checkinone.api.dto.PagamentoDTO;
 import com.checkinone.api.mapper.Mapper;
-import com.checkinone.api.repository.PagamentoRepository;
 import com.checkinone.model.FormaPagamento;
 import com.checkinone.model.Pagamento;
 import com.checkinone.model.StatusPagamento;
+import com.checkinone.repository.PagamentoRepository;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

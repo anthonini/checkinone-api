@@ -1,4 +1,4 @@
-package com.checkinone.api.repository;
+package com.checkinone.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
